@@ -41,7 +41,7 @@ and writing Roman numerals.
 @defproc[(roman->number [numeral (and/c string? #rx"(?i:[mdclxvi]+)")])
          (and/c natural-number/c (not/c 0))]{
  Returns the number represented by the Roman numeral string
- @racket[neumeral].
+ @racket[numeral].
 
  Roman numeral strings that do not use
  the standard subtractive forms are supported, but @racket[numeral]
