@@ -1,3 +1,3 @@
-roman-neumeral
+roman-numeral
 ==============
-A Racket library for parsing and writing Roman neumerals.
+A Racket library for parsing and writing Roman numerals.
