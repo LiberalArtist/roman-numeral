@@ -20,11 +20,6 @@ env:
     # Supply more than one RACKET_VERSION (as in the example below) to
     # create a Travis-CI build matrix to test against multiple Racket
     # versions.
-    - RACKET_VERSION=6.0
-    - RACKET_VERSION=6.1
-    - RACKET_VERSION=6.1.1
-    - RACKET_VERSION=6.2
-    - RACKET_VERSION=6.3
     - RACKET_VERSION=6.4
     - RACKET_VERSION=6.5
     - RACKET_VERSION=6.6
@@ -56,9 +51,9 @@ before_script:
 # `raco pkg install --deps search-auto` to install any required
 # packages without it getting stuck on a confirmation prompt.
 script:
- - raco test -x -p roman-neumeral
+ - raco test -x -p roman-numeral
 
 after_success:
- - raco setup --check-pkg-deps --pkgs roman-neumeral
+ - raco setup --check-pkg-deps --pkgs roman-numeral
  - raco pkg install --deps search-auto cover cover-coveralls
  - raco cover -b -f coveralls -d $TRAVIS_BUILD_DIR/coverage .

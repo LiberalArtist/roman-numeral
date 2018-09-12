@@ -1,6 +1,6 @@
 #lang info
 (define collection "roman-numeral")
-(define deps '("base"
+(define deps '(("base" #:version "6.4")
                "rackunit-lib"))
 (define build-deps '("scribble-lib" "racket-doc"))
 (define scribblings '(("scribblings/roman-numeral.scrbl" ())))
