@@ -17,11 +17,13 @@ and writing Roman numerals.
 @(define make-roman-eval
    (make-eval-factory '(roman-numeral)))
 
-@defproc[(number->roman [number (and/c natural-number/c (not/c 0))])
-         (and/c string? #rx"(?i:[mdclxvi]+)")]{
+@defproc[(number->roman [number exact-positive-integer?]
+                        [#:case output-case (or/c 'lower 'upper)
+                         (current-roman-numeral-case)])
+         (and/c string? #rx"^(?i:[mdclxvi]+)$")]{
  Returns the Roman numeral representation of @racket[number]
  as a string. The string will be in lower case if
- @racket[(current-roman-numeral-case)] is @racket['lower]
+ @racket[output-case] is @racket['lower]
  (the default) or in upper case otherwise.
  @examples[
  #:eval (make-roman-eval)
@@ -30,16 +32,20 @@ and writing Roman numerals.
  (parameterize ([current-roman-numeral-case 'upper])
    (number->roman 1666))
  ]
+ @history[
+ #:changed "0.1" @elem{Added @racket[#:case] argument.}         
+ ]}
+
+@defparam[current-roman-numeral-case output-case
+          (or/c 'lower 'upper)
+          #:value 'lower]{
+ Specifies whether strings returned by @racket[number->roman]
+ use upper case or lower case when no @racket[#:case]
+ argument is given.
 }
 
-@defparam[current-roman-numeral-case case
-          (or/c 'lower 'upper)]{
- Specifies whether the string returned by @racket[number->roman]
- is upper case or lower case.
-}
-
-@defproc[(roman->number [numeral (and/c string? #rx"(?i:[mdclxvi]+)")])
-         (and/c natural-number/c (not/c 0))]{
+@defproc[(roman->number [numeral (and/c string? #rx"^(?i:[mdclxvi]+)$")])
+         exact-positive-integer?]{
  Returns the number represented by the Roman numeral string
  @racket[numeral].
 
@@ -61,9 +67,7 @@ and writing Roman numerals.
  (number->roman 1903)
  (roman->number "MDCCCCX")
  (number->roman 1910)
- (code:comment "not a valid Roman numeral")
- (eval:error (roman->number "cdm"))
- ]
-}
+ (code:line (eval:error (roman->number "cdm")) (code:comment "not a valid Roman numeral"))
+ ]}
 
 
