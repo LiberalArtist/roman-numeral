@@ -1,4 +1,5 @@
 #lang info
+(define pkg-name "roman-numeral")
 (define collection "roman-numeral")
 (define deps '(("base" #:version "6.4")
                "rackunit-lib"))
